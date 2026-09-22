@@ -29,50 +29,65 @@ export default function Register() {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-header">
-          <h1>💎 FinTrack</h1>
-          <p>Create your free account</p>
+          <div className="auth-logo">₹</div>
+          <h1>Create an Account</h1>
+          <p>Start tracking and growing your wealth today</p>
         </div>
-        {error && <div className="alert alert-error">{error}</div>}
-        <form onSubmit={handleSubmit} className="auth-form">
+
+        {error && <div className="quick-feedback error">{error}</div>}
+
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="reg-username">Username</label>
+            <label htmlFor="reg-username">Full Name / Username</label>
             <input
               id="reg-username"
               type="text"
+              className="form-control"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Choose a username"
+              placeholder="e.g. John Doe"
               required
               minLength={3}
             />
           </div>
+
           <div className="form-group">
-            <label htmlFor="reg-email">Email</label>
+            <label htmlFor="reg-email">Email Address</label>
             <input
               id="reg-email"
               type="email"
+              className="form-control"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder="you@example.com"
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="reg-password">Password</label>
             <input
               id="reg-password"
               type="password"
+              className="form-control"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Create a password (min 6 chars)"
+              placeholder="Minimum 6 characters"
               required
               minLength={6}
             />
           </div>
-          <button type="submit" className="btn btn-primary btn-full" disabled={loading}>
+
+          <button
+            type="submit"
+            className="btn-black-primary"
+            style={{ width: '100%', marginTop: '8px' }}
+            disabled={loading}
+          >
             {loading ? 'Creating account...' : 'Create Account'}
           </button>
         </form>
+
         <p className="auth-footer">
           Already have an account? <Link to="/login">Sign in</Link>
         </p>

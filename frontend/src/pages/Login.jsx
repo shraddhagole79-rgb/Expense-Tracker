@@ -18,7 +18,7 @@ export default function Login() {
       await login(email, password);
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      setError(err.response?.data?.message || 'Invalid email or password');
     } finally {
       setLoading(false);
     }
@@ -28,39 +28,52 @@ export default function Login() {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-header">
-          <h1>💎 FinTrack</h1>
-          <p>Welcome back! Sign in to your account</p>
+          <div className="auth-logo">₹</div>
+          <h1>Welcome Back</h1>
+          <p>Sign in to your FinTrack expense dashboard</p>
         </div>
-        {error && <div className="alert alert-error">{error}</div>}
-        <form onSubmit={handleSubmit} className="auth-form">
+
+        {error && <div className="quick-feedback error">{error}</div>}
+
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="login-email">Email</label>
+            <label htmlFor="login-email">Email Address</label>
             <input
               id="login-email"
               type="email"
+              className="form-control"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder="you@example.com"
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="login-password">Password</label>
             <input
               id="login-password"
               type="password"
+              className="form-control"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
+              placeholder="••••••••"
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary btn-full" disabled={loading}>
+
+          <button
+            type="submit"
+            className="btn-black-primary"
+            style={{ width: '100%', marginTop: '8px' }}
+            disabled={loading}
+          >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
+
         <p className="auth-footer">
-          Don't have an account? <Link to="/register">Sign up</Link>
+          Don't have an account? <Link to="/register">Create an account</Link>
         </p>
       </div>
     </div>
